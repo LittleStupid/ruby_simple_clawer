@@ -76,7 +76,8 @@ end
 
 def download_img( img_url )
   return if !img_url
-  puts img_url
+  $count += 1
+  puts img_url + '  ' + 'number:' + $count.to_s
 
   begin
     content = open(img_url, read_timeout: 5)
