@@ -81,7 +81,7 @@ def download_img( img_url )
   begin
     content = open(img_url, read_timeout: 5)
   rescue Exception=>e
-    puts "Error: #{e}" + "  :  " + seed_url
+    puts "Error: #{e}" + "  :  " + img_url
     sleep 1
     return
   ensure
