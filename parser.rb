@@ -8,6 +8,7 @@ BAIDU = "https://www.baidu.com"
 ADDRESS = ""
 MAX_DEPTH = 20
 URL_MAX_LENGTH = 30
+IMG_REQUIRE_SIZE_IN_BYTE = 100000
 
 URLS = []
 $count = 0
@@ -76,8 +77,7 @@ end
 
 def download_img( img_url )
   return if !img_url
-  $count += 1
-  puts img_url + '  ' + 'number:' + $count.to_s
+
 
   begin
     content = open(img_url, read_timeout: 5)
@@ -89,6 +89,11 @@ def download_img( img_url )
     ######
   end
 
+  return if content.length < IMG_REQUIRE_SIZE_IN_BYTE
+
+  $count += 1
+  puts img_url + '  ' + 'number:' + $count.to_s
+  #return
   File.open( File.basename(img_url),'wb') do |f|
     f.write( (content).read )
   end
