@@ -6,7 +6,7 @@ BILIBILI = "http://www.bilibili.com"
 PIXIV = "http://www.pixiv.net/"
 BAIDU = "https://www.baidu.com"
 ADDRESS = ""
-MAX_DEPTH = 100
+MAX_DEPTH = 90
 URL_MAX_LENGTH = 60
 IMG_REQUIRE_SIZE_IN_BYTE = 1024 * 384
 
