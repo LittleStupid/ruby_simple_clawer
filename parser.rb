@@ -6,9 +6,9 @@ BILIBILI = "http://www.bilibili.com"
 PIXIV = "http://www.pixiv.net/"
 BAIDU = "https://www.baidu.com"
 ADDRESS = ""
-MAX_DEPTH = 20
-URL_MAX_LENGTH = 30
-IMG_REQUIRE_SIZE_IN_BYTE = 100000
+MAX_DEPTH = 200
+URL_MAX_LENGTH = 60
+IMG_REQUIRE_SIZE_IN_BYTE = 1024 * 512
 
 URLS = []
 $count = 0
