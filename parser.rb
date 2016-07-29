@@ -1,11 +1,12 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
+require 'colorize'
 
 BILIBILI = "http://www.bilibili.com"
 PIXIV = "http://www.pixiv.net/"
 BAIDU = "https://www.baidu.com"
-ADDRESS = ""
+ADDRESS = "https://h.nimingban.com/Forum"
 MAX_DEPTH = 90
 URL_MAX_LENGTH = 60
 IMG_REQUIRE_SIZE_IN_BYTE = 1024 * 384
@@ -40,18 +41,10 @@ def search_page( seed_url, depth = 0 )
     return
   end
 
-  begin
-    content = open(seed_url, read_timeout: 5)
-  rescue Exception=>e
-    puts "Error: #{e}" + "  :  " + seed_url
-    sleep 1
-    return
-  ensure
-    ######
-  end
+  content = open_remote_file( seed_url )
+  return if !content
 
   parse_body( content, depth )
-
 end
 
 def parse_body( content, depth )
@@ -67,7 +60,7 @@ def parse_body( content, depth )
     url = link['href']
     if valid_url?(url)
       if( !$visited_urls[url] && valid_length?(url) && !include_ban_words?(url) )
-        #puts url + '     ' + depth.to_s
+        puts ( url + '     ' + 'depth:' + depth.to_s ).red
         $visited_urls[url] = url
         search_page( url, depth + 1 )
       end
@@ -78,26 +71,30 @@ end
 def download_img( img_url )
   return if !img_url
 
-
-  begin
-    content = open(img_url, read_timeout: 5)
-  rescue Exception=>e
-    puts "Error: #{e}" + "  :  " + img_url
-    sleep 1
-    return
-  ensure
-    ######
-  end
-
+  content = open_remote_file(img_url)
+  return if !content
   return if content.length < IMG_REQUIRE_SIZE_IN_BYTE
 
   $count += 1
-  puts img_url + '  ' + 'number:' + $count.to_s
+  puts (img_url + '  ' + 'number:' + $count.to_s).green
   #return
   File.open( File.basename(img_url),'wb') do |f|
     f.write( (content).read )
   end
+end
 
+def open_remote_file(url)
+  begin
+    content = open(url, read_timeout: 5)
+  rescue Exception=>e
+    puts ("Error: #{e}" + "  :  " + url).yellow
+    sleep 1
+    return
+  ensure
+    ###
+  end
+
+  content
 end
 
 search_page(BILIBILI)
