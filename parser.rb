@@ -8,14 +8,14 @@ PIXIV = "http://www.pixiv.net/"
 BAIDU = "https://www.baidu.com"
 ADDRESS = "https://h.nimingban.com/Forum"
 MAX_DEPTH = 90
-URL_MAX_LENGTH = 40
+URL_MAX_LENGTH = 28
 IMG_REQUIRE_SIZE_IN_BYTE = 1024 * 384
 
 URLS = []
 $count = 0
 $visited_urls = {}
 
-BAN_WORDS = [ "163", "qq", "gov", "acg", "123", "72g", "1688", "18", "dnf", "7", "youku" ]
+BAN_WORDS = [ "163", "qq", "gov", "acg", "123", "72g", "1688", "18", "dnf", "7", "youku", "people" ]
 
 def valid_url?( url )
   url ||= ""
