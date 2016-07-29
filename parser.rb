@@ -88,7 +88,6 @@ def open_remote_file(url)
     content = open(url, read_timeout: 5)
   rescue Exception=>e
     puts ("Error: #{e}" + "  :  " + url).yellow
-    sleep 1
     return
   ensure
     ###
