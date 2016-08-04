@@ -1,3 +1,3 @@
 # ruby_simple_clawer
-### serch picture from the net.
+### serch pictures from the net.
     ruby parser.rb
